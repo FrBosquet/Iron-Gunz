@@ -6,22 +6,19 @@ import io from 'socket.io-client'
 class App extends Component {
   constructor() {
     super()
-    this.socket = io('http://localhost:4343')
-    this.state = {}
+    this.socket = io('192.168.1.45:4343')
+    this.state = { message: ''}
 
     document.addEventListener('keydown', keyEvent => {
-      this.setState({ [keyEvent.key]: true })
-      this.socket.emit('message', this.state)
-    })
-    
-    document.addEventListener('keyup', keyEvent => {
-      this.setState({ [keyEvent.key]: false })
+      this.socket.emit('keyPress', keyEvent.key)
     })
   }
 
   componentDidMount(){
-    this.socket.on('message', msg => console.log('Received', JSON.stringify(msg)))
+    this.socket.on('notification',console.log)
+    this.socket.on('message', msg => this.setState({ message: msg }))
   }
+
   render() {
     return (
       <div className="App">
@@ -30,13 +27,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-intro">
-          <ul>
-          {
-            Object.keys(this.state)
-              .filter( key => this.state[key])
-              .map( key => <li key={key}>{key}</li>)
-          }
-          </ul>
+          {this.state.message}
         </div>
       </div>
     )
