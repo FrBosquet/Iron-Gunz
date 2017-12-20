@@ -5,7 +5,7 @@ import { createStore } from 'redux'
 import './index.css'
 import App from './App'
 import rootReducer from './modules/rootReducer'
-import socketConnector from './modules/socketConnection'
+import socketConnector from './modules/socketConnector'
 import registerServiceWorker from './registerServiceWorker'
 
 let store = createStore(
