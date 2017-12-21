@@ -1,6 +1,6 @@
 import { compose, lifecycle, setDisplayName } from 'recompose'
 import { connect } from 'react-redux'
-import Logger from './Logger.jsx'
+import Logger from './Logger'
 import { logMessage } from './actions'
 import socketConnector from '../socketConnector'
 

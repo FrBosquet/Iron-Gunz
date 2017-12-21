@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css'
-import Box from '../shared/box'
+import { Box } from '../shared'
 
 const Logger = ({logs}) =>
   <Box>
