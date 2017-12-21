@@ -12,7 +12,11 @@ let store = createStore(
   rootReducer, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-socketConnector.connect('192.168.1.45:4343')
+const storedIdentity = localStorage.getItem('nickname')
+console.log('Connect as', storedIdentity)
+const url = `192.168.1.45:4343${storedIdentity ? `?nickname=${storedIdentity}` : ''}`
+console.log('Using this url:', url)
+socketConnector.connect(url)
 
 ReactDOM.render(
   <Provider store={store}>
