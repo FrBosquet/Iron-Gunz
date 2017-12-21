@@ -1,0 +1,26 @@
+.chat input {
+  width: 80%;
+}
+
+.chat-message span {
+  box-sizing: border-box;
+  padding: 5px;
+  display: inline-block;
+}
+
+.chat-message .author {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  color: magenta;
+  width: 15%;
+}
+
+.chat-message .content {
+  width: 75%;
+  color: wheat;
+}
+
+.chat-message .time-stamp {
+  width: 10%;
+}
