@@ -7,7 +7,7 @@ const Identity = ({setIdentity, unsetIdentity, formNickname, validatedNickname})
     {!validatedNickname ?
       <div>
         <h1>Identity</h1>
-        <form>
+        <form onSubmit={e=> e.preventDefault()}>
           <label htmlFor="nickname">Nickname:</label>
           <Field name="nickname" component="input" type="text" />
         </form>
