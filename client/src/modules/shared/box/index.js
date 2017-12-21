@@ -1,9 +1,7 @@
 import React from 'react'
 import './style.css'
 
-const Box = ({ children }) =>
+export const Box = ({ children }) =>
   <div className='box'>
     { children }
   </div>
-
-export default Box
