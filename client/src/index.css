@@ -4,8 +4,21 @@ body {
   font-family: sans-serif;
 }
 
+div {
+  border-radius: 5px;
+}
+
 .App {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.green-phospor{
+  background-color: black;
+  font-size: 0.8rem;
+  color: green;
+  font-family: monospace;
+  max-height: 80px;
+  overflow-y: auto;
 }
