@@ -3,11 +3,12 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+let generalChat = { clients: []}
 let rooms = {
-  room1: {},
-  room2: {},
-  room3: {},
-  room4: {}
+  room1: { clients: []},
+  room2: { clients: []},
+  room3: { clients: []},
+  room4: { clients: []}
 }
 let clients = {}
 
@@ -16,7 +17,7 @@ function shortId (id) {
 }
 
 function identityOf(id){
-  return clients[id] || shortId(id)
+  return clients[id]['nickname'] || shortId(id)
 }
 
 server.listen(4343, () => {
