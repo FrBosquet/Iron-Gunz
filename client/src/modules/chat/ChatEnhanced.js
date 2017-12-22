@@ -10,7 +10,8 @@ const mapStateToProps = state => {
   const formValues = form ? form.values : null 
   return {
     messages: state.chat,
-    entry: formValues ? formValues.entry : undefined
+    entry: formValues ? formValues.entry : undefined,
+    currentRoom: state.rooms.currentRoom
   }
 }
 

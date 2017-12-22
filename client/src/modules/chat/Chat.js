@@ -3,13 +3,13 @@ import { Box, Button } from '../shared'
 import { Field } from 'redux-form'
 import './style.css'
 
-const Chat = ({messages, newMessage}) =>
+const Chat = ({ currentRoom, messages, newMessage}) =>
   <Box className='chat'>
-    <h1>General</h1>
+    <h1>{ currentRoom }</h1>
     <Box className='green-phospor'>
       {messages.map( message => {
           return (
-            <div className='chat-message'>
+            <div className='chat-message' key={`${message.author+message.content+message.timeStamp}`}>
               <span className='author'>{message.author}:</span>
               <span className='content'>{message.content}</span>
               <span className='time-stamp'>{message.timeStamp}</span>

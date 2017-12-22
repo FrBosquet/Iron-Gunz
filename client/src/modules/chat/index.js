@@ -1,6 +1,6 @@
 import { createReducer } from 'redux-act'
 import * as actions from './action'
-import { leaveRoom } from '../roomSelector/actions'
+import { leaveRoom, joinRoom } from '../roomSelector/actions'
 import { getTimestamp } from '../utils/time';
 
 const defaultState = []
