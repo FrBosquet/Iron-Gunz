@@ -20,7 +20,7 @@ const Chat = ({ currentRoom, messages, newMessage}) =>
     </Box>
     <form onSubmit={newMessage}>
       <Field name="entry" component="input" type="text"/>
-      <Button label='send' />
+      <Button label='send' type='submit'/>
     </form>
   </Box>
 
