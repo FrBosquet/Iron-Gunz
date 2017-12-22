@@ -29,12 +29,10 @@ const enhance = compose(
   }),
   withHandlers({
     joinRoom: props => room => {
-      console.log('Join room', room)
       props.joinRoom(room)
       socketConnector.emit('JOIN_ROOM', room)
     },
     leaveRoom: props => () => {
-      console.log('Leave room')
       props.leaveRoom()
       socketConnector.emit('LEAVE_ROOM')
     }

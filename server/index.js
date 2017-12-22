@@ -41,7 +41,6 @@ server.listen(4343, () => {
 })
 
 io.on('connection', socket => {
-  console.log('Client connected', socket.id)
   const nickname = socket.handshake.query.nickname
   clients[socket.id] = {}
   clients[socket.id].room = 'lobby'
@@ -53,9 +52,6 @@ io.on('connection', socket => {
   notifyPartnersAt('lobby')
   
   socket.on('RETRIEVE_ROOMS', () =>{
-    console.log(`${identityOf(socket.id)} retrieves list of rooms`)
-    console.log('ROOMS', rooms)
-    console.log('LOBBY', lobby)
     const roomList = Object.keys(rooms)
     socket.emit('ROOM_LIST', roomList)
   })
@@ -69,8 +65,6 @@ io.on('connection', socket => {
     lobby.clients = lobby.clients.filter( id => id != socket.id)
     rooms[room].clients.push(socket.id)
     notifyPartners(room)
-    // io.to(room).emit('PARTNERS_LIST', clientsAt(room))
-    // io.to('lobby').emit('PARTNERS_LIST', clientsAt('lobby'))
   })
   
   socket.on('LEAVE_ROOM', () => {
@@ -81,19 +75,11 @@ io.on('connection', socket => {
     clients[socket.id].room = 'lobby'
     socket.leave(room)
     socket.join('lobby')
-    console.log(room)
     rooms[room].clients = rooms[room].clients.filter(id => id != socket.id)
     notifyPartners(room)
-    // io.to(room).emit('PARTNERS_LIST', clientsAt(room))
-    // io.to('lobby').emit('PARTNERS_LIST', clientsAt('lobby'))
   })
 
   socket.on('SET_IDENTITY', name => {
-    console.log(shortId(socket.id), 'wants to be know as', name)
-    // if(!clients[socket.id]){
-    //   clients[socket.id] = {}
-    // }
-    console.log(clients)
     clients[socket.id]['nickname'] = name
     const room = clients[socket.id].room
     notifyPartnersAt(room)
@@ -102,7 +88,6 @@ io.on('connection', socket => {
   })
   
   socket.on('UNSET_IDENTITY', () => {
-    console.log(socket.id, 'no longer wants to be know as', identityOf(socket.id))
     delete clients[socket.id].nickname
     const room = clients[socket.id].room
     socket.emit('ACK_FORGOT_IDENTITY')

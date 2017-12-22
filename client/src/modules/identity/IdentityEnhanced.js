@@ -35,11 +35,9 @@ const enhance = compose(
   }),
   withHandlers({
     setIdentity: props => () => {
-      console.log('I want to be named as', props.formNickname)
       socketConnector.emit('SET_IDENTITY', props.formNickname)
     },
     unsetIdentity: props => () => {
-      console.log('I want to be unidentified')
       socketConnector.emit('UNSET_IDENTITY')
     }
   })
