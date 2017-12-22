@@ -8,6 +8,11 @@ div {
   border-radius: 5px;
 }
 
+h1 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
 .App {
   display: flex;
   flex-direction: row;
