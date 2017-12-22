@@ -3,7 +3,7 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
-let generalChat = { clients: []}
+let lobby = { clients: []}
 let rooms = {
   room1: { clients: []},
   room2: { clients: []},
