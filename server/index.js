@@ -20,6 +20,22 @@ function identityOf(id){
   return clients[id]['nickname'] || shortId(id)
 }
 
+function clientsAt(room){
+  const clientList = room === 'lobby' ?
+    lobby.clients :
+    rooms[room].clients
+  return clientList.map(identityOf)
+}
+
+function notifyPartnersAt(room) {
+  io.to(room).emit('PARTNERS_LIST', clientsAt(room))
+}
+
+function notifyPartners(room){
+  notifyPartnersAt('lobby')
+  notifyPartnersAt(room)
+}
+
 server.listen(4343, () => {
   console.log('Listening on port 4343')
 })
@@ -28,15 +44,18 @@ io.on('connection', socket => {
   console.log('Client connected', socket.id)
   const nickname = socket.handshake.query.nickname
   clients[socket.id] = {}
-  clients[socket.id].room = 'general'
-  socket.join('general')
-  generalChat.clients.push(socket.id)
+  clients[socket.id].room = 'lobby'
+  socket.join('lobby')
+  lobby.clients.push(socket.id)
   if(nickname) clients[socket.id]['nickname'] = nickname
   socket.emit('MESSAGE', `Welcome to the server ${identityOf(socket.id)}`)
   io.emit('MESSAGE', `${identityOf(socket.id)} has connected to the server`)
-
+  notifyPartnersAt('lobby')
+  
   socket.on('RETRIEVE_ROOMS', () =>{
     console.log(`${identityOf(socket.id)} retrieves list of rooms`)
+    console.log('ROOMS', rooms)
+    console.log('LOBBY', lobby)
     const roomList = Object.keys(rooms)
     socket.emit('ROOM_LIST', roomList)
   })
@@ -79,12 +98,17 @@ io.on('connection', socket => {
     io.to(room).emit('CHAT_MESSAGE', msg) 
   })
 
-  socket.on('UNSET_IDENTITY', () => {
-    console.log(socket.id, 'no longer wants to be know as', identityOf(socket.id))
-    delete clients[socket.id]
-    socket.emit('ACK_FORGOT_IDENTITY')
-    io.emit('MESSAGE', `${shortId(socket.id)} is anonimus again`)
-  })
 
-  socket.on('disconnect', () => io.to('A game room').emit('notification', `${socket.id} has left this room`))
+  socket.on('disconnect', () => {
+    const room = clients[socket.id].room
+    switch(room){
+      case 'lobby':
+        lobby.clients = lobby.clients.filter(id => id != socket.id)
+      break
+      default:
+        rooms[room].clients = rooms[room].clients.filter(id => id != socket.id)
+    }
+    notifyPartnersAt(room)
+    io.emit('MESSAGE', `${identityOf(socket.id)} has disconnected`)
+  })
 })
