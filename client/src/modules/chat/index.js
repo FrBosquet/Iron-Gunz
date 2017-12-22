@@ -10,5 +10,6 @@ export default createReducer({
     const msg = {...message, timeStamp: getTimestamp()}
     return [msg, ...state]
   },
+  [joinRoom]: state => [],
   [leaveRoom]: state => []
 }, defaultState)
