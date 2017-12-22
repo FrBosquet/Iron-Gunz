@@ -63,31 +63,53 @@ io.on('connection', socket => {
   socket.on('JOIN_ROOM', room => {
     const msg = `${identityOf(socket.id)} joins ${room}`
     io.emit('MESSAGE', msg)
-    socket.leave('general')
+    socket.leave('lobby')
+    clients[socket.id].room = room
     socket.join(room)
-    generalChat.clients = generalChat.clients.filter( id => id != socket.id)
+    lobby.clients = lobby.clients.filter( id => id != socket.id)
     rooms[room].clients.push(socket.id)
+    notifyPartners(room)
+    // io.to(room).emit('PARTNERS_LIST', clientsAt(room))
+    // io.to('lobby').emit('PARTNERS_LIST', clientsAt('lobby'))
   })
   
   socket.on('LEAVE_ROOM', () => {
-    const msg = `${identityOf(socket.id)} get back to the lobby`
+    const msg = `${identityOf(socket.id)} gets back to the lobby`
     io.emit('MESSAGE', msg)
-    generalChat.clients.push(socket.id)
+    lobby.clients.push(socket.id)
     const room = clients[socket.id].room
+    clients[socket.id].room = 'lobby'
     socket.leave(room)
-    socket.join('general')
+    socket.join('lobby')
+    console.log(room)
     rooms[room].clients = rooms[room].clients.filter(id => id != socket.id)
+    notifyPartners(room)
+    // io.to(room).emit('PARTNERS_LIST', clientsAt(room))
+    // io.to('lobby').emit('PARTNERS_LIST', clientsAt('lobby'))
   })
 
   socket.on('SET_IDENTITY', name => {
     console.log(shortId(socket.id), 'wants to be know as', name)
-    if(!clients[socket.id]){
-      clients[socket.id]['nickname'] = name
-      socket.emit('ACK_IDENTITY', name)
-      io.emit('MESSAGE', `${shortId(socket.id)} is now known as ${name}`)
-    }
+    // if(!clients[socket.id]){
+    //   clients[socket.id] = {}
+    // }
+    console.log(clients)
+    clients[socket.id]['nickname'] = name
+    const room = clients[socket.id].room
+    notifyPartnersAt(room)
+    socket.emit('ACK_IDENTITY', name)
+    io.emit('MESSAGE', `${shortId(socket.id)} is now known as ${name}`)
   })
   
+  socket.on('UNSET_IDENTITY', () => {
+    console.log(socket.id, 'no longer wants to be know as', identityOf(socket.id))
+    delete clients[socket.id].nickname
+    const room = clients[socket.id].room
+    socket.emit('ACK_FORGOT_IDENTITY')
+    notifyPartnersAt(room)
+    io.emit('MESSAGE', `${shortId(socket.id)} is anonimus again`)
+  })
+
   socket.on('CHAT_MESSAGE', message => {
     const room = clients[socket.id].room
     const msg = {
