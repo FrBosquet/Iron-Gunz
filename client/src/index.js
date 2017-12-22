@@ -14,7 +14,7 @@ let store = createStore(
 
 const storedIdentity = localStorage.getItem('nickname')
 console.log('Connect as', storedIdentity)
-const url = `192.168.1.45:4343${storedIdentity ? `?nickname=${storedIdentity}` : ''}`
+const url = `192.168.1.229:4343${storedIdentity ? `?nickname=${storedIdentity}` : ''}`
 console.log('Using this url:', url)
 socketConnector.connect(url)
 
