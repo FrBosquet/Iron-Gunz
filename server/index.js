@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+const acho = require('acho')
+const log = acho()
 
 let lobby = { clients: []}
 let rooms = {
@@ -41,14 +43,20 @@ server.listen(4343, () => {
 })
 
 io.on('connection', socket => {
+  const ID = socket.id
+
+  log.info(`New conection. Id:${ID}`)
   const nickname = socket.handshake.query.nickname
-  clients[socket.id] = {}
-  clients[socket.id].room = 'lobby'
+  clients[ID] = {}
+  clients[ID].room = 'lobby'
   socket.join('lobby')
-  lobby.clients.push(socket.id)
-  if(nickname) clients[socket.id]['nickname'] = nickname
-  socket.emit('MESSAGE', `Welcome to the server ${identityOf(socket.id)}`)
-  io.emit('MESSAGE', `${identityOf(socket.id)} has connected to the server`)
+  lobby.clients.push(ID)
+  if(nickname) {
+    clients[ID]['nickname'] = nickname
+    log.info(`${ID} is now know as ${identityOf(ID)}`)
+  }
+  socket.emit('MESSAGE', `Welcome to the server ${identityOf(ID)}`)
+  io.emit('MESSAGE', `${identityOf(ID)} has connected to the server`)
   notifyPartnersAt('lobby')
   
   socket.on('RETRIEVE_ROOMS', () =>{
@@ -57,49 +65,49 @@ io.on('connection', socket => {
   })
 
   socket.on('JOIN_ROOM', room => {
-    const msg = `${identityOf(socket.id)} joins ${room}`
+    const msg = `${identityOf(ID)} joins ${room}`
     io.emit('MESSAGE', msg)
     socket.leave('lobby')
-    clients[socket.id].room = room
+    clients[ID].room = room
     socket.join(room)
-    lobby.clients = lobby.clients.filter( id => id != socket.id)
-    rooms[room].clients.push(socket.id)
+    lobby.clients = lobby.clients.filter( id => id != ID)
+    rooms[room].clients.push(ID)
     notifyPartners(room)
   })
   
   socket.on('LEAVE_ROOM', () => {
-    const msg = `${identityOf(socket.id)} gets back to the lobby`
+    const msg = `${identityOf(ID)} gets back to the lobby`
     io.emit('MESSAGE', msg)
-    lobby.clients.push(socket.id)
-    const room = clients[socket.id].room
-    clients[socket.id].room = 'lobby'
+    lobby.clients.push(ID)
+    const room = clients[ID].room
+    clients[ID].room = 'lobby'
     socket.leave(room)
     socket.join('lobby')
-    rooms[room].clients = rooms[room].clients.filter(id => id != socket.id)
+    rooms[room].clients = rooms[room].clients.filter(id => id != ID)
     notifyPartners(room)
   })
 
   socket.on('SET_IDENTITY', name => {
-    clients[socket.id]['nickname'] = name
-    const room = clients[socket.id].room
+    clients[ID]['nickname'] = name
+    const room = clients[ID].room
     notifyPartnersAt(room)
     socket.emit('ACK_IDENTITY', name)
-    io.emit('MESSAGE', `${shortId(socket.id)} is now known as ${name}`)
+    io.emit('MESSAGE', `${shortId(ID)} is now known as ${name}`)
   })
   
   socket.on('UNSET_IDENTITY', () => {
-    delete clients[socket.id].nickname
-    const room = clients[socket.id].room
+    delete clients[ID].nickname
+    const room = clients[ID].room
     socket.emit('ACK_FORGOT_IDENTITY')
     notifyPartnersAt(room)
-    io.emit('MESSAGE', `${shortId(socket.id)} is anonimus again`)
+    io.emit('MESSAGE', `${shortId(ID)} is anonimus again`)
   })
 
   socket.on('CHAT_MESSAGE', message => {
-    const room = clients[socket.id].room
+    const room = clients[ID].room
     const msg = {
-      authorId: socket.id,
-      author: identityOf(socket.id),
+      authorId: ID,
+      author: identityOf(ID),
       content: message 
     }
     io.to(room).emit('CHAT_MESSAGE', msg) 
@@ -107,15 +115,15 @@ io.on('connection', socket => {
 
 
   socket.on('disconnect', () => {
-    const room = clients[socket.id].room
+    const room = clients[ID].room
     switch(room){
       case 'lobby':
-        lobby.clients = lobby.clients.filter(id => id != socket.id)
+        lobby.clients = lobby.clients.filter(id => id != ID)
       break
       default:
-        rooms[room].clients = rooms[room].clients.filter(id => id != socket.id)
+        rooms[room].clients = rooms[room].clients.filter(id => id != ID)
     }
     notifyPartnersAt(room)
-    io.emit('MESSAGE', `${identityOf(socket.id)} has disconnected`)
+    io.emit('MESSAGE', `${identityOf(ID)} has disconnected`)
   })
 })
