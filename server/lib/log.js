@@ -24,5 +24,20 @@ module.exports = {
     const msg = `User ${who} leaves room ${room}`
     acho.info(msg)
     return msg
+  },
+  disconnection: who => {
+    const msg = `User ${who} has disconnected`
+    acho.info(msg)
+    return msg
+  },
+  setIdentity: (who, name) => {
+    const msg = `User ${who} its now know as ${name}`
+    acho.info(msg)
+    return msg
+  },
+  unsetIdentity: who => {
+    const msg = `User ${who} its now anonymus`
+    acho.info(msg)
+    return msg
   }
 }

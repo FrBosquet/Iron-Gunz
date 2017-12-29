@@ -17,8 +17,24 @@ class Clients {
     this.list[id].room = room
   }
 
+  whoIs(id){
+  return this.list[id].nickname || `${id.substr(0, 5)}...`
+  }
+
   whereIs(id) {
     return this.list[id].room
+  }
+
+  setIdentity(id, name){
+    this.list[id].nickname = name
+  }
+  
+  forgetIdentity(id){
+    this.list[id].nickname = undefined
+  }
+
+  remove(id) {
+    delete this.list[id]
   }
 }
 

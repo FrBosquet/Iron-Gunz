@@ -7,8 +7,12 @@ class Lobby {
     this.clients.push(id)
   }
 
+  getClients() {
+    return this.clients
+  }
+
   removeClient(id) {
-    this.clients.filter( clientId => clientId !== id)
+    this.clients = this.clients.filter( clientId => clientId !== id)
   }
 }
 
