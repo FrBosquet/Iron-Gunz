@@ -1,0 +1,20 @@
+.game-room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-room-screen {
+  background-color: black;
+  width: 100px;
+  height: 100px;
+}
+
+.player {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: green;
+  content: "";
+}
