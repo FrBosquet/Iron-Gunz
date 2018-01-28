@@ -9,7 +9,7 @@ class Room extends Lobby {
 
   addClient(id){
     this.clients.push(id)
-    if(this.getClientCount === 2){
+    if(this.getClientCount() === 2){
       this.available = false
     }
   }
