@@ -18,7 +18,7 @@ function notifyPartnersAt(room) {
 
 function notifyPartners(room){
   notifyPartnersAt('lobby')
-  notifyPartnersAt(room)
+  if(room != 'lobby') notifyPartnersAt(room)
 }
 
 const port = 4343
@@ -36,9 +36,9 @@ io.on('connection', socket => {
 
   const msg = log.newConnection(state.whoIs(ID))
   socket.emit('MESSAGE', msg)
-  
 
   io.emit('MESSAGE', `${state.whoIs(ID)} has connected to the server`)
+  socket.join('lobby')
   notifyPartnersAt('lobby')
   
   socket.on('RETRIEVE_ROOMS', () =>{
