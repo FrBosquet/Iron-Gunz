@@ -43,6 +43,10 @@ class State {
     return this.rooms[room].getClients()
   }
 
+  getClientCountAtRoom(room){
+    return this.getClientsAtRoom(room).length
+  }
+
   whereIs(id) {
     return this.clients.whereIs(id)
   }

@@ -54,6 +54,9 @@ io.on('connection', socket => {
     socket.join(room)
     io.to('lobby').emit('ROOM_LIST', state.getAvailableRooms())      
     notifyPartners(room)
+    if(state.getClientCountAtRoom(room) == 2){
+      io.to(room).emit('INIT_GAME', 'Game starts')
+    }
   })
   
   socket.on('LEAVE_ROOM', () => {
@@ -65,6 +68,7 @@ io.on('connection', socket => {
     socket.join('lobby')
     io.to('lobby').emit('ROOM_LIST', state.getAvailableRooms())
     notifyPartners(room)
+    io.to(room).emit('FINISH_GAME', 'Game ends')
   })
 
   socket.on('SET_IDENTITY', name => {

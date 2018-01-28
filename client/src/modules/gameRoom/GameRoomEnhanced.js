@@ -17,8 +17,10 @@ const enhance = compose(
   setDisplayName('GameRoomEnhanced'),
   connect(mapStateToProps),
   lifecycle({
-    componentWillUpdate( nextProps ){
-      debugger
+    componentDidMount(){
+      socketConnector.addListener('INIT_GAME', game => console.log(game))
+      socketConnector.addListener('FINISH_GAME', game => console.log(game))
+      document.addEventListener('keydown', ({ keyCode }) => console.log(keyCode))
     }
   })
 )
