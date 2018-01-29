@@ -8,7 +8,6 @@ class Game {
 
   update(input){
     this.state ++
-    console.log('Hola javi')
     return this.state
   }
 
