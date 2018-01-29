@@ -31,19 +31,8 @@ class State {
     this.clients.moveToRoom(id, room)
   }
 
-  getGame(room) {
-    return this.rooms[room].getGame()
-  }
-
   getAvailableRooms(){
     return Object.keys(this.rooms).filter( room => this.rooms[room].available)
-  }
-
-  getClientsAt(room) {
-    const clientList = room === 'lobby' ?
-      this.getClientsAtLobby() :
-      this.getClientsAtRoom(room)
-    return clientList.map(this.whoIs.bind(this))
   }
 
   getClientsAtLobby(){
@@ -54,7 +43,7 @@ class State {
     return this.rooms[room].getClients()
   }
 
-  getClientCountAtRoom(room) {
+  getClientCountAtRoom(room){
     return this.getClientsAtRoom(room).length
   }
 
@@ -83,4 +72,4 @@ class State {
   }
 }
 
-module.exports = new State()
+module.exports = State

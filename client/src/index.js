@@ -7,13 +7,14 @@ import App from './App'
 import rootReducer from './modules/rootReducer'
 import socketConnector from './modules/socketConnector'
 import registerServiceWorker from './registerServiceWorker'
+import { IP, PORT } from './config'
 
 let store = createStore(
   rootReducer, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const storedIdentity = localStorage.getItem('nickname')
-const url = `192.168.1.229:4343${storedIdentity ? `?nickname=${storedIdentity}` : ''}`
+const url = `${IP}:${PORT}${storedIdentity ? `?nickname=${storedIdentity}` : ''}`
 socketConnector.connect(url)
 
 ReactDOM.render(
@@ -21,4 +22,3 @@ ReactDOM.render(
     <App />
   </Provider>
   , document.getElementById('root'))
-registerServiceWorker()

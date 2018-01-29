@@ -19,7 +19,9 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount(){
-      socketConnector.addListener('GAME_UPDATE', newGameState => this.props.updateGame(newGameState))
+      socketConnector.addListener('INIT_GAME', game => console.log(game))
+      socketConnector.addListener('FINISH_GAME', game => console.log(game))
+      document.addEventListener('keydown', ({ keyCode }) => console.log(keyCode))
     }
   })
 )
