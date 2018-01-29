@@ -1,18 +1,10 @@
 import { createReducer } from 'redux-act'
 import * as actions from './actions'
 
-const defaultState = {
-  game: false
-}
-
-function newGame(){
-  return {
-    state: 0
-  }
-}
+const defaultState = null
 
 export default createReducer({
-  [actions.initGame]: state => ({...state, game: newGame()}),
-  [actions.finishGame]: state => ({...state, game: false}),
-  [actions.updateGame]: (state, newGameState) => ({...state, game: {state: newGameState}})
+  [actions.initGame]: (state, newGame) => newGame,
+  [actions.finishGame]: () => defaultState,
+  [actions.updateGame]: (state, newGameState) => newGameState
 }, defaultState)

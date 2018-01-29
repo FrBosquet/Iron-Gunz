@@ -5,7 +5,7 @@ import GameRoom from './GameRoom'
 import { initGame, finishGame, updateGame } from './actions'
 
 const mapStateToProps = state => ({
-  
+  game: state.game
 })
 
 const mapDispatchToProps = {
@@ -19,9 +19,9 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount(){
-      socketConnector.addListener('INIT_GAME', game => console.log(game))
-      socketConnector.addListener('UPDATE_GAME', game => console.log(game))
-      socketConnector.addListener('FINISH_GAME', game => console.log(game))
+      socketConnector.addListener('INIT_GAME', game => this.props.initGame(game))
+      socketConnector.addListener('UPDATE_GAME', game => this.props.updateGame(game))
+      socketConnector.addListener('FINISH_GAME', game => this.props.finishGame())
       document.addEventListener('keydown', ({ keyCode }) => console.log(keyCode))
     }
   })
