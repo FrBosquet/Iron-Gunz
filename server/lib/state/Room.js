@@ -13,7 +13,7 @@ class Room extends Lobby {
     super.addClient(id)
     if(this.clients.length == 2){
       this.available = false
-      this.game = new Game()
+      this.game = new Game(...this.clients)
     }
   }
 
