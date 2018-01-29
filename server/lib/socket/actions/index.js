@@ -28,18 +28,18 @@ module.exports = (logger, state, socket, client, id) => {
     LEAVE_ROOM: () => {
       const room = state.whereIs(id)
       const msg = logger.leaveRoom(state.whoIs(id), room)
+      const game = state.getGame(room)
       state.moveClientToLobby(id)
+      if (game) {
+        game.stopTimer()
+        socket.to(room).emit('FINISH_GAME', 'the game has finished')
+      }
       client.leave(room)
       client.join('lobby')
       socket.emit('MESSAGE', msg)
       socket.to('lobby').emit('ROOM_LIST', state.getAvailableRooms())
       socket.to('lobby').emit('PARTNERS_LIST', state.getClientsAt('lobby'))
       socket.to(room).emit('PARTNERS_LIST', state.getClientsAt(room))
-      const game = state.getGame(room)
-      if (game) {
-        game.stopTimer()
-        socket.to(room).emit('FINISH_GAME', 'the game has finished')
-      }
     },
     SET_IDENTITY: name => {
       const room = state.whereIs(id)
