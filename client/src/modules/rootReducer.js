@@ -4,7 +4,7 @@ import loggerReducer from './logger'
 import roomsReducer from './roomSelector'
 import identityReducer from './identity'
 import chatReducer from './chat'
-import gameRoom from './gameRoom'
+import { gameReducer, keyReducer} from './gameRoom'
 
 export default combineReducers({
   logs: loggerReducer,
@@ -12,5 +12,6 @@ export default combineReducers({
   form: formReducer,
   identity: identityReducer,
   chat: chatReducer,
-  game: gameRoom
+  game: gameReducer,
+  keybard: keyReducer
 })
