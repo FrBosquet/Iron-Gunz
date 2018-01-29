@@ -20,6 +20,7 @@ const enhance = compose(
   lifecycle({
     componentDidMount(){
       socketConnector.addListener('INIT_GAME', game => console.log(game))
+      socketConnector.addListener('UPDATE_GAME', game => console.log(game))
       socketConnector.addListener('FINISH_GAME', game => console.log(game))
       document.addEventListener('keydown', ({ keyCode }) => console.log(keyCode))
     }

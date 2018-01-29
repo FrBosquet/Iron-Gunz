@@ -15,9 +15,12 @@ module.exports = (logger, state, socket, client, id) => {
       socket.to('lobby').emit('PARTNERS_LIST', state.getClientsAt('lobby'))
       const game = state.getGame(room)
       if(game){
+        const createGameMsg = logger.createGame(room)
+        socket.to(room).emit('MESSAGE', createGameMsg)
+        socket.to(room).emit('INIT_GAME', game)
         const timer = setInterval(()=> {
           const newState = game.update(0)
-          socket.to(room).emit('GAME_UPDATE', newState)
+          socket.to(room).emit('UPDATE_GAME', newState)
         }, 100)
         game.setTimer(timer)
       }
@@ -35,6 +38,7 @@ module.exports = (logger, state, socket, client, id) => {
       const game = state.getGame(room)
       if (game) {
         game.stopTimer()
+        socket.to(room).emit('FINISH_GAME', 'the game has finished')
       }
     },
     SET_IDENTITY: name => {

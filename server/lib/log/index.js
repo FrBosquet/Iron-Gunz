@@ -25,6 +25,11 @@ module.exports = {
     acho.info(msg)
     return msg
   },
+  createGame: room => {
+    const msg = `New game started in room ${room}`
+    acho.info(msg)
+    return msg
+  },
   disconnection: who => {
     const msg = `User ${who} has disconnected`
     acho.info(msg)
