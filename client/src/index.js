@@ -6,7 +6,6 @@ import './index.css'
 import App from './App'
 import rootReducer from './modules/rootReducer'
 import socketConnector from './modules/socketConnector'
-import registerServiceWorker from './registerServiceWorker'
 import { IP, PORT } from './config'
 
 let store = createStore(
