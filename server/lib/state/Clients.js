@@ -1,12 +1,12 @@
+const Client = require('./Client')
+
 class Clients {
   constructor(){
     this.list = {}
   }
 
   newClient(id, nickname) {
-    this.list[id] = {
-      nickname
-    }
+    this.list[id] = new Client(id)
   }
 
   moveToLobby(id) {
