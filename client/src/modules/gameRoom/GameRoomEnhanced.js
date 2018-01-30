@@ -2,7 +2,7 @@ import { compose, lifecycle, setDisplayName } from 'recompose'
 import { connect } from 'react-redux'
 import socketConnector from '../socketConnector'
 import GameRoom from './GameRoom'
-import { initGame, finishGame, updateGame, keyPress, keyRelease } from './actions'
+import { initGame, finishGame, updateGame, keyPress, keyRelease, sendKeyset } from './actions'
 
 const mapStateToProps = state => ({
   game: state.game
@@ -13,7 +13,8 @@ const mapDispatchToProps = {
   finishGame,
   updateGame,
   keyPress,
-  keyRelease
+  keyRelease,
+  sendKeyset
 }
 
 const validKeys = [37,38,39,40]
@@ -29,6 +30,15 @@ const enhance = compose(
 
       document.addEventListener('keydown', ({ keyCode }) => validKeys.includes(keyCode) && this.props.keyPress(keyCode))
       document.addEventListener('keyup', ({ keyCode }) => validKeys.includes(keyCode) && this.props.keyRelease(keyCode))
+
+    },
+    componentWillReceiveProps(nextProps) {
+      if( !this.props.game && nextProps.game){
+        this.timer = setInterval(this.props.sendKeyset,100)
+      } else if (this.props.game && !nextProps.game) {
+        clearInterval(this.timer)
+      }
+
     }
   })
 )

@@ -12,7 +12,9 @@ export default createReducer({
   [actions.finishGame]: state => {
     return defaultGameState
   },
-  [actions.updateGame]: (state, newGameState) => ({...state, ...newGameState}),
+  [actions.updateGame]: (state, newGameState) => (
+    {...state, ...newGameState}
+  ),
   [actions.keyPress]: (state, keyCode) => {
     if(!state) return state
     const { keySet } = state
