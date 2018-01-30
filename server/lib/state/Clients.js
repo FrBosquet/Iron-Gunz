@@ -7,6 +7,7 @@ class Clients {
 
   newClient(id, nickname) {
     this.list[id] = new Client(id)
+    this.setIdentity(id, nickname)
   }
 
   moveToLobby(id) {
