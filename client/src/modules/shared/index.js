@@ -1,2 +1,2 @@
-export * from './box'
-export * from './button'
+export * from './styled/wrapper'
+export * from './styled/button'

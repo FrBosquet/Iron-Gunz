@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '../shared'
+import { Wrapper } from '../shared'
 import './style.css'
 
 const makeStyle = player => ({
@@ -14,13 +14,13 @@ const GameRoom = ({ game }) => {
   const player2style = makeStyle(players[1])
 
   return (
-    <Box className='game-room'>
+    <Wrapper className='game-room'>
       <h1>I´m the propper game </h1>
       <div className='game-room-screen'>
         <div className='player' id='player1' style={ player1style }></div>
         <div className='player' id='player2' style={ player2style }></div>
       </div>
-    </Box>
+    </Wrapper>
   )
 }
 

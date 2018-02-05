@@ -1,13 +1,13 @@
 import React from 'react'
 import './style.css'
-import { Box } from '../shared'
+import { Wrapper } from '../shared'
 
 const Logger = ({logs}) =>
-  <Box width='50%'>
+  <Wrapper width='50%'>
     <h1 className="logger-title">Logger</h1>
-    <Box className="green-phospor">
+    <Wrapper className="green-phospor">
       {logs.map(log => <div key={log}>{log}</div>)}
-    </Box>
-  </Box>
+    </Wrapper>
+  </Wrapper>
 
 export default Logger

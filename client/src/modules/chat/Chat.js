@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Button } from '../shared'
+import { Wrapper, Button } from '../shared'
 import { Field } from 'redux-form'
 import './style.css'
 
 const Chat = ({ currentRoom, messages, newMessage}) =>
-  <Box className='chat'>
+  <Wrapper className='chat'>
     <h1>{ currentRoom }</h1>
-    <Box className='green-phospor'>
+    <Wrapper className='green-phospor'>
       {messages.map( message => {
           return (
             <div className='chat-message' key={`${message.author+message.content+message.timeStamp}`}>
@@ -17,11 +17,11 @@ const Chat = ({ currentRoom, messages, newMessage}) =>
           )
         })
       }
-    </Box>
+    </Wrapper>
     <form onSubmit={newMessage}>
       <Field name="entry" component="input" type="text"/>
       <Button label='send' type='submit'/>
     </form>
-  </Box>
+  </Wrapper>
 
 export default Chat
