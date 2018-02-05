@@ -5,6 +5,10 @@ class Clients {
     this.list = {}
   }
 
+  getClient(id) {
+    return this.list[id]
+  }
+
   newClient(id, nickname) {
     this.list[id] = new Client(id)
     this.setIdentity(id, nickname)

@@ -2,7 +2,7 @@ const Lobby = require('./Lobby')
 const Room = require('./Room')
 const Clients = require('./Clients')
 
-const defaultRooms = ['room1','room2','room3','room4']
+const defaultRooms = ['Alpha','Beta','Delta','Kappa']
 
 class State {
   constructor(){
@@ -16,6 +16,18 @@ class State {
 
   newClient(id, nickname) {
     this.clients.newClient(id, nickname)
+  }
+
+  getKeysetFrom(room){
+    return this.rooms[room].getClients().reduce((obj, id)=>{
+      const clientFile = this.clients.getClient(id)
+      obj[id] = clientFile ? clientFile.getKeyset() : []
+      return obj
+    },{})
+  }
+
+  setKeysetToClient(id, keyset){
+    this.clients.getClient(id).setKeyset(keyset)
   }
 
   moveClientToLobby(id) {

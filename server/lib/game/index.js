@@ -9,9 +9,30 @@ class Game {
     this.timer = null
   }
 
+  updatePlayerPosition(id, input){
+    const currentPosition = this.players[id]
+    const jump = 2.5
+    input.forEach(key => {
+      switch(key){
+        case 38: currentPosition['y'] -= jump; break;//up
+        case 40: currentPosition['y'] += jump; break;//down
+        case 37: currentPosition['x'] -= jump; break;//left
+        case 39: currentPosition['x'] += jump; break;//right
+      }
+    })
+    
+    if(currentPosition['y'] < 2.5 ) currentPosition['y'] = 2.5
+    if(currentPosition['y'] > 97.5) currentPosition['y'] = 97.5
+    if(currentPosition['x'] < 2.5 ) currentPosition['x'] = 2.5
+    if(currentPosition['x'] > 97.5) currentPosition['x'] = 97.5
+
+    this.players[id] = currentPosition
+  }
+
   update(input){
-    const { timer, ...state} = this
-    return state
+    const { timer, ...state } = this
+    Object.keys(input).forEach(id => this.updatePlayerPosition(id, input[id]))
+    return state 
   }
 
   setTimer(timer) {

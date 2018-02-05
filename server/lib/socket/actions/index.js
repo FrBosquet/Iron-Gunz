@@ -19,7 +19,8 @@ module.exports = (logger, state, socket, client, id) => {
         socket.to(room).emit('MESSAGE', createGameMsg)
         socket.to(room).emit('INIT_GAME', game)
         const timer = setInterval(()=> {
-          const newState = game.update(0)
+          const clientsKeysets = state.getKeysetFrom(room)
+          const newState = game.update(clientsKeysets)
           socket.to(room).emit('UPDATE_GAME', newState)
         }, 100)
         game.setTimer(timer)
@@ -63,6 +64,9 @@ module.exports = (logger, state, socket, client, id) => {
         content: message
       }
       socket.to(room).emit('CHAT_MESSAGE', msg)
+    },
+    KEYSET: set => {
+      state.setKeysetToClient(id, set)
     }
   }
 }
