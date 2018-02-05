@@ -1,6 +1,6 @@
 import React from 'react'
 import { Wrapper } from '../shared'
-import './style.css'
+import { GameRoomScreen, Player } from './styled'
 
 const makeStyle = player => ({
   transform: `translate(${player.x - 2.5}px, ${player.y - 2.5}px)`
@@ -14,12 +14,12 @@ const GameRoom = ({ game }) => {
   const player2style = makeStyle(players[1])
 
   return (
-    <Wrapper className='game-room'>
+    <Wrapper center>
       <h1>I´m the propper game </h1>
-      <div className='game-room-screen'>
-        <div className='player' id='player1' style={ player1style }></div>
-        <div className='player' id='player2' style={ player2style }></div>
-      </div>
+      <GameRoomScreen>
+        <Player id='player1' style={ player1style } />
+        <Player id='player2' style={ player2style } />
+      </GameRoomScreen>
     </Wrapper>
   )
 }
