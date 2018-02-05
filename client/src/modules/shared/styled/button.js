@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-  border: 3px solid black;
+  border: 3px solid white;
   color: white;
   border-radius: 6px;
   font-weight: bold;
@@ -9,7 +9,8 @@ export const Button = styled.button`
   margin: 5px;
   cursor: pointer;
   &:hover{
-    border-color: ${props => props.back ? 'orange' : 'green'};
+    border-color: ${props => props.back ? 'orange' : 'lightGreen'};
+    color: ${props => props.back ? 'orange' : 'lightGreen'};
   }
 `
 
