@@ -16,3 +16,5 @@ export const Button = styled.button`
 Button.defaultProps = {
   back: false
 }
+
+Button.displayName = 'Button'

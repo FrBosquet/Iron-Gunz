@@ -1,12 +1,12 @@
 import React from 'react'
-import { Wrapper, Button } from '../shared'
+import { Wrapper, Button, PhosporScreen } from '../shared'
 import { Field } from 'redux-form'
 import './style.css'
 
 const Chat = ({ currentRoom, messages, newMessage}) =>
   <Wrapper className='chat'>
     <h1>{ currentRoom }</h1>
-    <Wrapper className='green-phospor'>
+    <PhosporScreen>
       {messages.map( message => {
           return (
             <div className='chat-message' key={`${message.author+message.content+message.timeStamp}`}>
@@ -17,11 +17,11 @@ const Chat = ({ currentRoom, messages, newMessage}) =>
           )
         })
       }
-    </Wrapper>
     <form onSubmit={newMessage}>
       <Field name="entry" component="input" type="text"/>
-      <Button label='send' type='submit'/>
+      <Button type='submit'>Send</Button>
     </form>
+    </PhosporScreen>
   </Wrapper>
 
 export default Chat

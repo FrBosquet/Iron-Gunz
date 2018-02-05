@@ -1,13 +1,13 @@
 import React from 'react'
 import './style.css'
-import { Wrapper } from '../shared'
+import { PhosporScreen, Wrapper } from '../shared'
 
 const Logger = ({logs}) =>
   <Wrapper width='50%'>
     <h1 className="logger-title">Logger</h1>
-    <Wrapper className="green-phospor">
+    <PhosporScreen>
       {logs.map(log => <div key={log}>{log}</div>)}
-    </Wrapper>
+    </PhosporScreen>
   </Wrapper>
 
 export default Logger
