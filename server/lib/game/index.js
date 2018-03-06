@@ -1,10 +1,12 @@
+const Board = require('./board')
+
 class Game {
   constructor( player1, player2 ){
     this.players = {
       [player1]:{ x: 2.5, y: 50 },
       [player2]:{ x: 97.5, y: 50 }
     }
-    this.board = []
+    this.board = new Board(20, 10)
     this.state = 0
     this.timer = null
   }

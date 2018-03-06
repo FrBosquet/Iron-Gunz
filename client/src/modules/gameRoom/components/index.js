@@ -1,11 +1,22 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 export const GameRoomScreen = styled.div`
-  width: 100px;
-  height: 100px;
+  width: ${props => props.width * 32}px;
+  height: ${props => props.height * 32}px;
   position: relative;
   background-color: black;
 `
+
+GameRoomScreen.defaultProps = {
+  width: 10,
+  height: 10
+}
+
+GameRoomScreen.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number
+}
 
 export const Player = styled.div`
   position: absolute;
