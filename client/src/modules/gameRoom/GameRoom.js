@@ -1,6 +1,6 @@
 import React from 'react'
 import { Wrapper } from '../shared'
-import { GameRoomScreen, Player } from './styled'
+import { GameRoomScreen, Player } from './components'
 
 const makeStyle = player => ({
   transform: `translate(${player.x - 2.5}px, ${player.y - 2.5}px)`
