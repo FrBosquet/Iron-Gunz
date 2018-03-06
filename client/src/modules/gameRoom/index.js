@@ -1,9 +1,8 @@
 import { createReducer } from 'redux-act'
 import * as actions from './actions'
-import socket from '../socketConnector'
 
 const defaultGameState = null
-const notEqualTo = (value) => (comparator) => comparator != value
+const notEqualTo = (value) => (comparator) => comparator !== value
 
 export default createReducer({
   [actions.initGame]: (state, newGame) => {

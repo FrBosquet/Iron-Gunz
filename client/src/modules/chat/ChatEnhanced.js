@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose, setDisplayName, withHandlers, lifecycle } from 'recompose'
 import { reduxForm, reset } from 'redux-form'
 import socketConnector from '../socketConnector'
-import { addMessage, newMessage } from './action'
+import { addMessage } from './action'
 
 const mapStateToProps = state => {
   const form = state.form.chat
