@@ -3,12 +3,15 @@ version: '2'
 services:
   server:
     build: './server'
+    volumes:
+      - ./server:/home/server
+      - /home/server/node_modules
     ports:
       - "4343:4343"
   client:
     build: ./client
     volumes:
-      - ./client:/home/app/client
-      - /home/app/client/node_modules
+      - ./client:/home/client
+      - /home/client/node_modules
     ports:
       - "3000:3000"
