@@ -9,6 +9,8 @@ import rootReducer from './modules/rootReducer'
 import socketConnector from './modules/socketConnector'
 import { IP, PORT } from './config'
 import sagas from './modules/sagas'
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -27,6 +29,8 @@ socketConnector.connect(url)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>
   , document.getElementById('root'))
