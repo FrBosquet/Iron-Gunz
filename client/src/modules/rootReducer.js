@@ -5,6 +5,7 @@ import roomsReducer from './roomSelector'
 import identityReducer from './identity'
 import chatReducer from './chat'
 import gameReducer from './gameRoom'
+import screenReducer from './screens'
 
 export default combineReducers({
   logs: loggerReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   identity: identityReducer,
   chat: chatReducer,
   game: gameReducer,
+  screen: screenReducer
 })

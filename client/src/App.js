@@ -5,6 +5,7 @@ import Identity from './modules/identity/IdentityEnhanced'
 import Chat from './modules/chat/ChatEnhanced'
 import GameRoom from './modules/gameRoom/GameRoomEnhanced'
 import styled from 'styled-components'
+import ScreenRouter from './modules/screens/ScreenRouterEnhanced'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -16,11 +17,7 @@ class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <Logger />
-        <Identity />
-        <GameRoom />
-        <Chat />
-        <RoomSelector />
+        <ScreenRouter />
       </AppWrapper>
     )
   }
