@@ -1,16 +1,26 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-  border: 3px solid black;
-  color: black;
-  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  color: ${ props => props.theme.color.lightGrey};
   font-weight: bold;
-  background-color: ${props => props.back ? 'red' : 'lightGrey'};
+  border: none;
+  padding: 24px 8px;
+  background: none;
   margin: 5px;
   cursor: pointer;
   &:hover{
-    border-color: ${props => props.back ? 'orange' : 'darkGreen'};
-    color: ${props => props.back ? 'orange' : 'darkGreen'};
+    background-color: ${props => props.back ? 
+      props.theme.color.lightRose : 
+      props.theme.color.lightGrey };
+    color: ${props => props.back ? 
+      props.theme.color.darkRose : 
+      props.theme.color.darkGrey };
+  }
+
+  &:focus{
+    outline: none;
   }
 `
 
