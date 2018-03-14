@@ -46,7 +46,7 @@ export const LayoutWrapper = styled.div`
     end: 'flex-end',
     center: 'center',
     stretch: 'stretch'
-  }[props.align] || 'flex-start')};
+  }[props.align] || 'stretch')};
   flex: ${props => props.weight};
   border: ${ props => props.theme.debug ? '2px solid red' : 'none'};
 `
