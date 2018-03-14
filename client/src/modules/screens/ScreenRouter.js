@@ -1,20 +1,28 @@
 import React from 'react'
+import { ScreenWrapper } from './components'
 import { 
-  ScreenWrapper,
   TitleScreen,
   OptionsScreen,
   NotFoundScreen
-} from './components'
+} from './screens'
 
+const withProps = (Component, props) => <Component {...props} />
+
+const routeScreen = (screen, handlers) => {
+  let ScreenComponent = {
+    title: TitleScreen ,
+    options: OptionsScreen
+  }[screen]
+
+  ScreenComponent = ScreenComponent || NotFoundScreen
+  // const screenWithHandlers = withProps(screenComponent || NotFoundScreen, handlers)
+  return <ScreenComponent {...handlers}/>
+}
 
 const ScreenRouter = ({screen, ...handlers}) => {
   return <ScreenWrapper>
-    {{
-      title: <TitleScreen {...handlers}/>,
-      options: <OptionsScreen {...handlers} />
-      }[screen] || <NotFoundScreen {...handlers} />}
+    {routeScreen(screen, handlers)}
   </ScreenWrapper>
-
 }
 
 export default ScreenRouter

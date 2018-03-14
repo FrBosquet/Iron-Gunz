@@ -1,5 +1,5 @@
 import React from 'react'
-import { Screen } from './screen'
+import { Screen } from '../components'
 import { Title, LayoutWrapper, Button } from '../../shared'
 
 export const NotFoundScreen = ({goToTitle}) => 
