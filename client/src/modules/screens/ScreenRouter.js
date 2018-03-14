@@ -1,8 +1,10 @@
 import React from 'react'
 import { ScreenWrapper } from './components'
 import { 
+  AboutScreen,
   TitleScreen,
   OptionsScreen,
+  LobbyScreen,
   NotFoundScreen
 } from './screens'
 
@@ -10,12 +12,13 @@ const withProps = (Component, props) => <Component {...props} />
 
 const routeScreen = (screen, handlers) => {
   let ScreenComponent = {
-    title: TitleScreen ,
-    options: OptionsScreen
+    title: TitleScreen,
+    lobby: LobbyScreen,
+    options: OptionsScreen,
+    about: AboutScreen
   }[screen]
 
   ScreenComponent = ScreenComponent || NotFoundScreen
-  // const screenWithHandlers = withProps(screenComponent || NotFoundScreen, handlers)
   return <ScreenComponent {...handlers}/>
 }
 

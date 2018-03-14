@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   goToOptions: () => actions.setScreen('options'),
   goToTitle: () => actions.setScreen('title'),
-  goToGame: () => actions.setScreen('game')
+  goToLobby: () => actions.setScreen('lobby'),
+  goToAbout: () => actions.setScreen('about')
 }
 
 const enhance = compose(

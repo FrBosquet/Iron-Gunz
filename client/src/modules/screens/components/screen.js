@@ -14,5 +14,6 @@ export const Screen = styled.div`
   flex-direction: column;
   height: 100vh;  
   max-width: 920px;
+  min-width: 800px;
   margin: auto;
 `

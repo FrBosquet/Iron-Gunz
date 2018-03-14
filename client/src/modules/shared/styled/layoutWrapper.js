@@ -47,7 +47,7 @@ export const LayoutWrapper = styled.div`
     center: 'center',
     stretch: 'stretch'
   }[props.align] || 'flex-start')};
-  flex-grow: ${props => props.weight};
+  flex: ${props => props.weight};
   border: ${ props => props.theme.debug ? '2px solid red' : 'none'};
 `
 
