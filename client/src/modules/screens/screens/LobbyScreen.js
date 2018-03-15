@@ -6,10 +6,10 @@ import Chat from '../../chat/ChatEnhanced'
 
 export const LobbyScreen = ({goToTitle}) => 
   <Screen>
-    <LayoutWrapper weight={1} align='start'>
+    <LayoutWrapper weight={1} align='start' padded>
       <Title shadow={true} size='big'>Lobby</Title>
     </LayoutWrapper>
-    <LayoutWrapper direction='horizontal' weight={10}>
+    <LayoutWrapper direction='horizontal' weight={10} padded>
       <LayoutWrapper weight={1}>
         <Title size='regular'>Rooms</Title>
         <RoomSelector />
@@ -19,7 +19,7 @@ export const LobbyScreen = ({goToTitle}) =>
         <Chat />
       </LayoutWrapper>
     </LayoutWrapper>
-    <LayoutWrapper weight={1} direction='horizontal' align='end' justify='end'>
-      <Button onClick={goToTitle}> Back </Button>
+    <LayoutWrapper weight={1} direction='horizontal' align='end' justify='end' padded>
+      <Button big onClick={goToTitle}> Back </Button>
     </LayoutWrapper>
   </Screen>

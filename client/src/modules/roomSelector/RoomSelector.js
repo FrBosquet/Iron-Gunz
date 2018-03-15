@@ -1,21 +1,21 @@
 import React from 'react'
-import { Wrapper, Button } from '../shared'
+import { LayoutWrapper, Button, LayoutWrapperutton, Text } from '../shared'
 
 const RoomSelector = ({currentRoom, rooms, joinRoom, leaveRoom, partners}) =>{
+  const lobby = currentRoom === 'lobby'
   return (
-    <Wrapper>
+    <LayoutWrapper>
+      <Text>You are in {currentRoom}. Who is here?</Text>
+      <Text bold padded>{ partners.join(', ')}</Text>
+      { lobby && <Text>Available rooms:</Text> }
       {
-        currentRoom === 'lobby' ?
+        lobby ?
           rooms.map( room => 
-            <Button key={room} onClick={() => joinRoom(room)}>{room}</Button>
+            <Button leftAlign key={room} onClick={() => joinRoom(room)}>{room}</Button>
           ) :
           <Button onClick={leaveRoom}>Leave room</Button>
       }
-      <h3>You are in {currentRoom}. Who is here?</h3>
-      <div>
-        { partners.join(', ')}
-      </div>
-    </Wrapper>
+    </LayoutWrapper>
   )
 }
 
