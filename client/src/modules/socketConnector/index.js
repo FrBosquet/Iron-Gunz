@@ -1,9 +1,17 @@
 import io from 'socket.io-client'
+import roomSelectorActions from '../roomSelector/socketActions'
+
+const Actions = {
+  ...roomSelectorActions
+}
 
 export default class socketConnector {
   static socket
-  static connect(port){
+  static connect(port, store){
     this.socket = io(port)
+    Object.keys(Actions).forEach(action => {
+      this.addListener(action, payload => store.dispatch(Actions[action](payload)))
+    })
   }
   static addListener(event, callback){
     if (!this.socket) throw new Error('The socket is not open')

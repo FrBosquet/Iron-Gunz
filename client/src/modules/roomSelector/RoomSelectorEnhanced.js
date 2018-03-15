@@ -23,8 +23,6 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       socketConnector.emit('RETRIEVE_ROOMS')
-      socketConnector.addListener('ROOM_LIST', msg => this.props.setRooms(msg))
-      socketConnector.addListener('PARTNERS_LIST', list => this.props.setPartners(list))
     }
   }),
   withHandlers({

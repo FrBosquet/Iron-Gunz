@@ -25,7 +25,7 @@ sagaMiddleware.run(sagas)
 
 const storedIdentity = localStorage.getItem('nickname')
 const url = `${IP}:${PORT}${storedIdentity ? `?nickname=${storedIdentity}` : ''}`
-socketConnector.connect(url)
+socketConnector.connect(url, store)
 
 ReactDOM.render(
   <Provider store={store}>
