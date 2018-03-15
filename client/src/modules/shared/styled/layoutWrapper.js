@@ -7,7 +7,7 @@ const centerMixin = css`
   align-items: center;
   justify-content: center;
 `
-
+//TO BE DELETED
 export const Wrapper = styled.div`
   width: calc(${ props => props.width} - 46px);
   display: inline-block;
@@ -25,10 +25,15 @@ Wrapper.defaultProps = {
 
 Wrapper.displayName = 'Wrapper'
 
+//END OF TO BE DELETED
+
 export const LayoutWrapper = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 16px;
+  padding: ${props => props.padded ?
+    props.theme.gap.small :
+    0
+  };
   flex-direction: ${props => ({
     horizontal: 'row',
     vertical: 'column'
@@ -40,25 +45,27 @@ export const LayoutWrapper = styled.div`
     beetwen: 'space-between',
     around: 'space-around',
     even: 'space-evenly'
-  }[props.justify] || 'flex-start')};
+  }[props.justify])};
   align-items: ${props => ({
     start: 'flex-start',
     end: 'flex-end',
     center: 'center',
     stretch: 'stretch'
-  }[props.align] || 'stretch')};
+  }[props.align])};
   flex: ${props => props.weight};
   border: ${ props => props.theme.debug ? '2px solid red' : 'none'};
 `
 
 LayoutWrapper.defaultProps = {
+  padded: false,
   direction: 'vertical',
   justify: 'start',
-  align: 'start',
+  align: 'stretch',
   weight: 1
 }
 
 LayoutWrapper.propTypes = {
+  padded: PropTypes.bool,
   direction: PropTypes.string,
   justify: PropTypes.string,
   align: PropTypes.string,
