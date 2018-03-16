@@ -30,6 +30,8 @@ Wrapper.displayName = 'Wrapper'
 export const LayoutWrapper = styled.div`
   display: flex;
   box-sizing: border-box;
+  overflow: auto;
+  background: ${props => props.contrast ? props.theme.color.darkGrey : 'none'};
   padding: ${props => props.padded ?
     props.theme.gap.small :
     0
@@ -61,7 +63,8 @@ LayoutWrapper.defaultProps = {
   direction: 'vertical',
   justify: 'start',
   align: 'stretch',
-  weight: 1
+  weight: 1,
+  contrast: false
 }
 
 LayoutWrapper.propTypes = {
@@ -69,7 +72,8 @@ LayoutWrapper.propTypes = {
   direction: PropTypes.string,
   justify: PropTypes.string,
   align: PropTypes.string,
-  weight: PropTypes.number
+  weight: PropTypes.number,
+  contrast: PropTypes.bool
 }
 
 LayoutWrapper.displayName = 'LayoutWrapper'

@@ -3,7 +3,7 @@ export default {
     darkGrey: '#111311',
     baseGrey: '#333633',
     lightGrey: '#999c99',
-    lightRose: '#9c9999'
+    lightRose: '#ae8888'
   },
   font: {
     main: '"Share Tech Mono", monospace',

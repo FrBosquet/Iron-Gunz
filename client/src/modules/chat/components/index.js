@@ -11,23 +11,18 @@ const AuthorSpan = Span.extend`
   overflow-x: hidden;
   text-overflow: ellipsis;
   font-weight: bold;
-  color: magenta;
+  color: ${({ theme }) => theme.color.lightRose};
   width: 15%;
 `
 
 const ContentSpan = Span.extend`
-  width: 75%;
-  color: wheat;
-`
-
-const TimestampSpan = Span.extend`
-  width: 10%;
+  width: 85%;
+  color: ${({theme}) => theme.color.lightGrey};
 `
 
 export const Message = ({author, content, timeStamp}) => (
-  <div key={`${author + content + timeStamp}`}>
+  <div>
     <AuthorSpan>{author}:</AuthorSpan>
     <ContentSpan>{content}</ContentSpan>
-    <TimestampSpan>{timeStamp}</TimestampSpan>
   </div>
 )
