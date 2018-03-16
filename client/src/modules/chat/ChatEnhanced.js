@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { compose, setDisplayName, withHandlers, lifecycle } from 'recompose'
 import { reduxForm, reset } from 'redux-form'
 import socketConnector from '../socketConnector'
-import { addMessage } from './action'
 
 const mapStateToProps = state => {
   const form = state.form.chat
@@ -16,21 +15,13 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  clearEntry: () => dispatch(reset('chat')),
-  addMessage: message => dispatch(addMessage(message))
+  clearEntry: () => dispatch(reset('chat'))
 })
 
 const enhance = compose(
   setDisplayName('ChatEnhanced'),
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({form: 'chat'}),
-  lifecycle({
-    componentDidMount(){
-      socketConnector.addListener('CHAT_MESSAGE', msg => {
-        this.props.addMessage(msg)
-      })
-    }
-  }),
   withHandlers({
     newMessage: props => e => {
       e.preventDefault()
