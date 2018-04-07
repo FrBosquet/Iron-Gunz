@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Title = styled.h1`
-  font-family: Pixelicious, monospace;
+  font-family: ${props => props.theme.font.decorated};
   font-size: ${props => ({
     regular: 1,
     enormous: 4,
