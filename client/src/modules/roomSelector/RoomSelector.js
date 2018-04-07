@@ -1,7 +1,7 @@
 import React from 'react'
 import { LayoutWrapper, Button, LayoutWrapperutton, Text } from '../shared'
 
-const RoomSelector = ({currentRoom, rooms, joinRoom, leaveRoom, partners}) =>{
+const RoomSelector = ({currentRoom, rooms, joinRoom, leaveRoom, partners, playerState, setReady, unsetReady}) =>{
   const lobby = currentRoom === 'lobby'
   return (
     <LayoutWrapper>
@@ -13,7 +13,12 @@ const RoomSelector = ({currentRoom, rooms, joinRoom, leaveRoom, partners}) =>{
           rooms.map( room => 
             <Button leftAlign key={room} onClick={() => joinRoom(room)}>{room}</Button>
           ) :
-          <Button onClick={leaveRoom}>Leave room</Button>
+          <LayoutWrapper direction='vertical'>
+            {playerState !== 'ready' ? 
+              <Button onClick={setReady}>Ready</Button> :
+              <Button onClick={unsetReady}>Not ready</Button>}
+            <Button onClick={leaveRoom}>Leave room</Button>
+          </LayoutWrapper >
       }
     </LayoutWrapper>
   )

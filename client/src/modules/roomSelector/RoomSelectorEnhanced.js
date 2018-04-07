@@ -7,7 +7,8 @@ import { setRooms, joinRoom, leaveRoom, setPartners } from './actions'
 const mapStateToProps = state => ({
   rooms: state.rooms.roomList,
   currentRoom: state.rooms.currentRoom,
-  partners: state.rooms.partners
+  partners: state.rooms.partners,
+  playerState: state.rooms.playerState
 })
 
 const mapDispatchToProps = {
@@ -33,8 +34,13 @@ const enhance = compose(
     leaveRoom: props => () => {
       props.leaveRoom()
       socketConnector.emit('LEAVE_ROOM')
+    },
+    setReady: () => () => {
+      socketConnector.emit('SET_READY')
+    },
+    unsetReady: () => () => {
+      socketConnector.emit('UNSET_READY')
     }
-
   })
 )
 

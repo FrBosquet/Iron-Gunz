@@ -16,7 +16,7 @@ module.exports = {
     return msg
   },
   joinRoom: (who, room) => {
-    const msg = `User ${who} joins room ${room}` 
+    const msg = `User ${who} joins room ${room}`
     acho.info(msg)
     return msg
   },
@@ -42,6 +42,16 @@ module.exports = {
   },
   unsetIdentity: who => {
     const msg = `User ${who} its now anonymus`
+    acho.info(msg)
+    return msg
+  },
+  userReady: who => {
+    const msg = `${who} is ready`
+    acho.info(msg)
+    return msg
+  },
+  userNotReady: who => {
+    const msg = `${who} is not ready`
     acho.info(msg)
     return msg
   }
