@@ -5,7 +5,8 @@ module.exports = (logger, state, socket, client, id) => {
       client.emit('ROOM_LIST', state.getAvailableRooms())
     },
     JOIN_ROOM: room => {
-      const msg = logger.joinRoom(state.whoIs(id), room)
+      const user = state.whoIs(id)
+      const msg = logger.joinRoom(user, room)
       state.moveClientToRoom(id, room)
       client.leave('lobby')
       client.join(room)
@@ -13,12 +14,13 @@ module.exports = (logger, state, socket, client, id) => {
       socket.to('lobby').emit('ROOM_LIST', state.getAvailableRooms())
       socket.to(room).emit('PARTNERS_LIST', state.getClientsAt(room))
       socket.to('lobby').emit('PARTNERS_LIST', state.getClientsAt('lobby'))
+      socket.to(room).emit('CHAT_MESSAGE', { content: `${user} has join ${room}` })
       const game = state.getGame(room)
-      if(game){
+      if (game) {
         const createGameMsg = logger.createGame(room)
         socket.to(room).emit('MESSAGE', createGameMsg)
         socket.to(room).emit('INIT_GAME', game)
-        const timer = setInterval(()=> {
+        const timer = setInterval(() => {
           const clientsKeysets = state.getKeysetFrom(room)
           const newState = game.update(clientsKeysets)
           socket.to(room).emit('UPDATE_GAME', newState)
