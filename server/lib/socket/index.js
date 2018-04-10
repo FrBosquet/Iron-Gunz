@@ -18,8 +18,8 @@ module.exports = function(log, state){
     state.moveClientToLobby(ID)
     
     const msg = log.newConnection(state.whoIs(ID))
-    client.emit('MESSAGE', msg)
     client.join('lobby')
+
     socket.to('lobby').emit('CHAT_MESSAGE', { content: msg })
 
     socket.to('lobby').emit('PARTNERS_LIST', state.getClientsAt('lobby'))
@@ -27,7 +27,7 @@ module.exports = function(log, state){
     client.on('disconnect', () => {
       const room = state.whereIs(ID)
       socket.to(room).emit('PARTNERS_LIST', state.getClientsAt(room))
-      socket.emit('MESSAGE', log.disconnection(state.whoIs(ID)))
+      socket.to('lobby').emit('CHAT_MESSAGE', { content: log.disconnection(state.whoIs(ID))})
       state.removeClient(ID)
     })
 
