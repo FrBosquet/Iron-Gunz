@@ -56,6 +56,7 @@ module.exports = (logger, state, socket, client, id) => {
         socket.to(room).emit('FINISH_GAME', 'the game has finished')
       }
 
+      state.stopRoomCountdown(room)
       client.emit('ACK_UNSET_READY')
       client.leave(room)
       client.join(lobby)
@@ -105,7 +106,7 @@ module.exports = (logger, state, socket, client, id) => {
       const user = state.whoIs(id)
       const userNotReadyMsg = logger.userNotReady(user)
       state.unsetClientReady(id)
-      state.startRoomCountdown(room)
+      state.stopRoomCountdown(room)
       messageTo(room, userNotReadyMsg)
       client.emit('ACK_UNSET_READY')
     },
