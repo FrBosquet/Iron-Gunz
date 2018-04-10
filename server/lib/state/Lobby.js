@@ -7,12 +7,16 @@ class Lobby {
     this.clients.push(id)
   }
 
+  removeClient(id) {
+    this.clients = this.clients.filter(clientId => clientId !== id)
+  }
+
   getClients() {
     return this.clients
   }
 
-  removeClient(id) {
-    this.clients = this.clients.filter( clientId => clientId !== id)
+  getClientCount() {
+    return this.clients.length
   }
 }
 

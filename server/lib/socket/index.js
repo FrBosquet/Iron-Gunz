@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const socket = require('socket.io')(server)
-const actionsCreator = require('./actions')
+const actionsCreator = require('../actions')
 const port = 4343
 
 module.exports = function(log, state){
