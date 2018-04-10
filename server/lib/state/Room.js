@@ -5,24 +5,27 @@ class Room extends Lobby {
   constructor( name ) {
     super()
     this.name = name
+    this.state = 'WAITING'
     this.available = true
     this.game = undefined
+    this.clientsReady = {}
+    this.secondsLeft = 0
+    this.countdown = undefined
   }
 
   addClient(id){
     super.addClient(id)
+    this.clientsReady[id] = false
     if(this.clients.length == 2){
       this.available = false
       this.game = new Game(...this.clients)
     }
   }
-
-  getGame() {
-    return this.game
-  }
-
+  
   removeClient(id){
     this.clients = this.clients.filter(clientId => clientId !== id)
+    delete this.clientsReady[id]
+    this.state = 'WAITING'
     this.available = true
     if(this.game){
       this.game.stopTimer()

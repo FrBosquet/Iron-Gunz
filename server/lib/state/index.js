@@ -43,6 +43,34 @@ class State {
     this.clients.moveToRoom(id, room)
   }
 
+  setClientReady(id) {
+    const room = this.rooms[this.clients.whereIs(id)]
+    room.setClientReady(id)
+    if (room.isRoomReady()) {
+      console.log('All ready bro!')
+    }
+  }
+
+  unsetClientReady(id) {
+    const room = this.rooms[this.clients.whereIs(id)]
+    room.unsetClientReady(id)
+    if (!room.isRoomReady()) {
+      console.log('Someone is not ready bro!')
+    }
+  }
+
+  isRoomReady(room){
+    return this.rooms[room] && this.rooms[room].isRoomReady()
+  }
+
+  startRoomCountdown(room, splitCallback, finalCallback){
+    this.rooms[room].startCountdown(splitCallback, finalCallback)
+  }
+
+  stopRoomCountdown(room){
+    this.rooms[room].stopCountdown()
+  }
+
   getGame(room) {
     return this.rooms[room].getGame()
   }

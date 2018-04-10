@@ -15,5 +15,5 @@ export default createReducer({
   [actions.setPartners]: (state, partners) => ({ ...state, partners: partners }),
   [actions.setReady]: state => ({ ...state, playerState: 'ready' }),
   [actions.unsetReady]: state => ({ ...state, playerState: 'not ready' }),
-
+  [actions.setPlayerStateWaitingForAck]: state => ({ ...state, playerState: 'waiting'})
 }, defaultState)

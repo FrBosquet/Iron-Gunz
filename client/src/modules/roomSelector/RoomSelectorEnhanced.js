@@ -2,7 +2,7 @@ import { compose, lifecycle, setDisplayName, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
 import RoomSelector from './RoomSelector'
 import socketConnector from '../socketConnector'
-import { setRooms, joinRoom, leaveRoom, setPartners } from './actions'
+import { setRooms, joinRoom, leaveRoom, setPartners, setPlayerStateWaitingForAck } from './actions'
 
 const mapStateToProps = state => ({
   rooms: state.rooms.roomList,
@@ -15,7 +15,8 @@ const mapDispatchToProps = {
   setRooms,
   joinRoom,
   leaveRoom,
-  setPartners
+  setPartners,
+  setPlayerStateWaitingForAck
 }
 
 const enhance = compose(
@@ -35,10 +36,12 @@ const enhance = compose(
       props.leaveRoom()
       socketConnector.emit('LEAVE_ROOM')
     },
-    setReady: () => () => {
+    setReady: props => () => {
+      props.setPlayerStateWaitingForAck()
       socketConnector.emit('SET_READY')
     },
-    unsetReady: () => () => {
+    unsetReady: props => () => {
+      props.setPlayerStateWaitingForAck()
       socketConnector.emit('UNSET_READY')
     }
   })

@@ -20,6 +20,7 @@ module.exports = function(log, state){
     const msg = log.newConnection(state.whoIs(ID))
     client.emit('MESSAGE', msg)
     client.join('lobby')
+    socket.to('lobby').emit('CHAT_MESSAGE', { content: msg })
 
     socket.to('lobby').emit('PARTNERS_LIST', state.getClientsAt('lobby'))
 
