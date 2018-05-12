@@ -6,7 +6,8 @@ module.exports = (logger, state, socket, client, id) => {
 		}
 
 		if (who) {
-			;(message.authorId = who), (message.author = state.whoIs(id))
+			message.authorId = who
+			message.author = state.whoIs(id)
 		}
 
 		socket.to(where).emit('CHAT_MESSAGE', message)
