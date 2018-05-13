@@ -1,16 +1,16 @@
 class Client {
-  constructor(id){
-    this.id = id
-    this.keySet = []
-  }
+	constructor(id) {
+		this.id = id
+		this.keyset = []
+	}
 
-  setKeyset(keyset) {
-    this.keySet = keyset
-  }
+	setKeyset(keyset) {
+		this.keyset = keyset
+	}
 
-  getKeyset(){
-    return this.keySet
-  }
+	getKeyset() {
+		return this.keyset
+	}
 }
 
 module.exports = Client
