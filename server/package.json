@@ -1,19 +1,22 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "Iron Gunz server",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
-    "start": "node index.js"
-  },
-  "author": "Fran Bosquet",
-  "license": "ISC",
-  "dependencies": {
-    "acho": "^4.0.0",
-    "express": "^4.16.2",
-    "nodemon": "^1.13.3",
-    "socket.io": "^2.0.4"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"description": "Iron Gunz server",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha --recursive lib/",
+		"tdd": "mocha --recursive lib/ --watch",
+		"dev": "nodemon index.js",
+		"start": "node index.js"
+	},
+	"author": "Fran Bosquet",
+	"license": "ISC",
+	"dependencies": {
+		"acho": "^4.0.0",
+		"chai": "^4.1.2",
+		"express": "^4.16.2",
+		"mocha": "^5.1.1",
+		"nodemon": "^1.13.3",
+		"socket.io": "^2.0.4"
+	}
 }
