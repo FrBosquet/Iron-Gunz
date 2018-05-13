@@ -32,18 +32,18 @@ module.exports = (logger, state, socket, client, id) => {
 			messageTo(room, `${user} has join`)
 			messageTo(lobby, `${user} has join ${room}`)
 
-			const game = state.getGame(room)
-			if (game) {
-				const createGameMsg = logger.createGame(room)
-				messageTo(room, createGameMsg)
-				socket.to(room).emit('INIT_GAME', game)
-				const timer = setInterval(() => {
-					const clientsKeysets = state.getKeysetFrom(room)
-					const newState = game.update(clientsKeysets)
-					socket.to(room).emit('UPDATE_GAME', newState)
-				}, 100)
-				game.setTimer(timer)
-			}
+			// const game = state.getGame(room)
+			// if (game) {
+			// 	const createGameMsg = logger.createGame(room)
+			// 	messageTo(room, createGameMsg)
+			// 	socket.to(room).emit('INIT_GAME', game)
+			// 	const timer = setInterval(() => {
+			// 		const clientsKeysets = state.getKeysetFrom(room)
+			// 		const newState = game.update(clientsKeysets)
+			// 		socket.to(room).emit('UPDATE_GAME', newState)
+			// 	}, 100)
+			// 	game.setTimer(timer)
+			// }
 		},
 		LEAVE_ROOM: () => {
 			const user = state.whoIs(id)
@@ -96,7 +96,11 @@ module.exports = (logger, state, socket, client, id) => {
 				state.startRoomCountdown(
 					room,
 					secondsLeft => messageTo(room, `${secondsLeft}...`),
-					() => messageTo(room, 'Countdown over')
+					() => {
+						const gameStartedMsg = logger.createGame(room)
+						messageTo(room, gameStartedMsg)
+						socket.to(room).emit('INIT_GAME', {})
+					}
 				)
 			}
 			messageTo(room, userReadyMsg)
