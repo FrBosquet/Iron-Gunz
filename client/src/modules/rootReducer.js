@@ -6,13 +6,15 @@ import identityReducer from './identity'
 import chatReducer from './chat'
 import gameReducer from './gameRoom'
 import screenReducer from './screens'
+import notificationReducer from './notification'
 
 export default combineReducers({
-  logs: loggerReducer,
-  rooms: roomsReducer,
-  form: formReducer,
-  identity: identityReducer,
-  chat: chatReducer,
-  game: gameReducer,
-  screen: screenReducer
+	logs: loggerReducer,
+	rooms: roomsReducer,
+	form: formReducer,
+	identity: identityReducer,
+	chat: chatReducer,
+	game: gameReducer,
+	screen: screenReducer,
+	notification: notificationReducer
 })

@@ -2,11 +2,13 @@ import io from 'socket.io-client'
 import roomSelectorActions from '../roomSelector/socketActions'
 import chatActions from '../chat/socketActions'
 import gameActions from '../gameRoom/socketActions'
+import notificationActions from '../notification/socketActions'
 
 const Actions = {
 	...roomSelectorActions,
 	...chatActions,
-	...gameActions
+	...gameActions,
+	...notificationActions
 }
 
 export default class socketConnector {
