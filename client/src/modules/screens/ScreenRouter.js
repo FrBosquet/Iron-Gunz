@@ -8,8 +8,6 @@ import {
   NotFoundScreen
 } from './screens'
 
-const withProps = (Component, props) => <Component {...props} />
-
 const routeScreen = (screen, handlers) => {
   let ScreenComponent = {
     title: TitleScreen,

@@ -1,7 +1,5 @@
 import { createReducer } from 'redux-act'
 import * as actions from './actions'
-import { leaveRoom, joinRoom } from '../roomSelector/actions'
-import { getTimestamp } from '../utils/time'
 
 const defaultState = {
 	connectionStatus: false,

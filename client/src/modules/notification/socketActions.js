@@ -1,4 +1,4 @@
-import { setConnected, setDisconnected, addNotification } from './actions'
+import { setConnected, setDisconnected } from './actions'
 
 export default {
 	connect: () => setConnected(),

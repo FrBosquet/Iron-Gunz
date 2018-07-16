@@ -1,6 +1,6 @@
 import Chat from './Chat'
 import { connect } from 'react-redux'
-import { compose, setDisplayName, withHandlers, lifecycle } from 'recompose'
+import { compose, setDisplayName, withHandlers } from 'recompose'
 import { reduxForm, reset } from 'redux-form'
 import socketConnector from '../socketConnector'
 

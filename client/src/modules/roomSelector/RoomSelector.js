@@ -1,5 +1,5 @@
 import React from 'react'
-import { LayoutWrapper, Button, LayoutWrapperutton, Text } from '../shared'
+import { LayoutWrapper, Button, Text } from '../shared'
 
 const RoomSelector = ({
   currentRoom,

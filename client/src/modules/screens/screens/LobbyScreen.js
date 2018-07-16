@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { compose, setDisplayName } from 'recompose'
 import { Screen } from '../components'
 import { Title, LayoutWrapper, Button } from '../../shared'
 import RoomSelector from '../../roomSelector/RoomSelectorEnhanced'

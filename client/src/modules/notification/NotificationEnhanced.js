@@ -17,14 +17,14 @@ const enhance = compose(
 
 const NotificationEnhanced = enhance(Notification)
 
-const container = styled.div`
+const Container = styled.div`
 	position: 'fixed';
 `
 
-container.displayName = 'NotificationWrapper'
+Container.displayName = 'NotificationWrapper'
 
 export default () => (
-	<container>
+	<Container>
 		<NotificationEnhanced />
-	</container>
+	</Container>
 )
