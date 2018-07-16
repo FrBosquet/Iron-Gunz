@@ -120,4 +120,4 @@ class State {
   }
 }
 
-module.exports = new State()
+module.exports = State

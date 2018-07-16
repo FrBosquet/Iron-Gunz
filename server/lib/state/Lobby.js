@@ -4,7 +4,7 @@ class Lobby {
   }
 
   addClient(id) {
-    this.clients.push(id)
+    if(!this.clients.includes(id)) this.clients.push(id)
   }
 
   removeClient(id) {
