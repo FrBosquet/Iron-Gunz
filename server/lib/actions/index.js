@@ -1,8 +1,11 @@
+uuid = require('uuid')
+
 module.exports = (logger, state, socket, client, id) => {
 	const lobby = 'lobby'
 	const messageTo = (where, content, who) => {
 		const message = {
-			content
+			content,
+			id: uuid()
 		}
 
 		if (who) {

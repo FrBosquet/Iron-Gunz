@@ -8,8 +8,8 @@ const Chat = ({ currentRoom, messages, newMessage}) =>
     <LayoutWrapper contrast>
       { messages.map( message => {
           return message.authorId ?
-            <Message {...message} key={message.timeStamp+message.content}/> :
-            <Notification {...message} key={message.timeStamp+message.content} />
+            <Message {...message} key={message.id}/> :
+            <Notification {...message} key={message.id} />
         })
       }
     </LayoutWrapper>
